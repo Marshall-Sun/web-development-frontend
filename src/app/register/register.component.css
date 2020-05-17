@@ -14,3 +14,9 @@ input {
   margin-bottom: 15px;
   text-align: center;
 }
+
+h1 {
+  text-align: center;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
