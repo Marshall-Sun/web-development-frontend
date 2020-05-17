@@ -1,0 +1,101 @@
+<div class="myform">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label nzSpan="11" nzRequired nzFor="email"
+        >📧邮箱</nz-form-label
+      >
+      <nz-form-control
+        nzErrorTip="邮箱格式错误！"
+      >
+        <input nz-input formControlName="email" id="email" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzSpan="11" nzFor="password" nzRequired
+        >🔑密码</nz-form-label
+      >
+      <nz-form-control
+        nzErrorTip="密码格式错误！"
+      >
+        <input
+          nz-input
+          type="password"
+          id="password"
+          formControlName="password"
+          (ngModelChange)="updateConfirmValidator()"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzSpan="11" nzFor="checkPassword" nzRequired
+        >🔑重复密码</nz-form-label
+      >
+      <nz-form-control [nzErrorTip]="errorTpl">
+        <input
+          nz-input
+          type="password"
+          formControlName="checkPassword"
+          id="checkPassword"
+        />
+        <ng-template #errorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            密码格式错误！
+          </ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">
+            密码不一致！
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzSpan="11" nzFor="nickname" nzRequired>
+        <span>
+          📛昵称
+          <i
+            nz-icon
+            nz-tooltip
+            nzTitle="What do you want other to call you"
+            nzType="question-circle"
+            nzTheme="outline"
+          ></i>
+        </span>
+      </nz-form-label>
+      <nz-form-control
+        nzErrorTip="昵称格式错误！"
+      >
+        <input nz-input id="nickname" formControlName="nickname" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzSpan="11" nzFor="phoneNumber" nzRequired
+        >📞电话号码</nz-form-label
+      >
+      <nz-form-control
+        [nzValidateStatus]="validateForm.controls['phoneNumber']"
+        nzErrorTip="电话号码格式错误！"
+        class="phone-input"
+      >
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+          <ng-template #addOnBeforeTemplate>
+            <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+              <nz-option nzLabel="+86" nzValue="+86"></nz-option>
+            </nz-select>
+          </ng-template>
+          <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control>
+        <label nz-checkbox formControlName="agree">
+          <span>同意<a>使用协议</a></span>
+        </label>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control>
+        <button nz-button nzType="primary">✔️注册</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

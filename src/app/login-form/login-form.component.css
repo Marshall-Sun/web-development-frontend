@@ -1,0 +1,16 @@
+input {
+  width: 220px;
+}
+
+.phone-input {
+  max-width: 220px;
+}
+
+.phone-select {
+  width: 70px;
+}
+
+.register-area {
+  margin-bottom: 15px;
+  text-align: center;
+}

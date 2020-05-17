@@ -1,0 +1,31 @@
+h1 {
+  text-align: center;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+nz-content {
+  background-image: url("https://cdn.jsdelivr.net/gh/Marshall-Sun/CDN/img/angular-bg.jpg");
+  padding-bottom: 100px;
+}
+
+nz-footer {
+  text-align: center;
+  background-color: black;
+  background-position: bottom;
+  color: white;
+}
+
+svg {
+  position: relative;
+  bottom: -5.5px;
+}
+
+.ant-layout-footer div {
+  font-size: 14px;
+  line-height: 2;
+}
+
+a {
+  color: white;
+}
