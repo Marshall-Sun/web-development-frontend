@@ -1,3 +1,7 @@
+/**
+ * TODO: 注册按钮
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
