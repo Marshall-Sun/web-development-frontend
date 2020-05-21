@@ -18,11 +18,9 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    console.log(this.validateForm.value);
-  }
-
-  updateConfirmValidator(): void {
-    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
+    if (this.validateForm.valid) {
+      console.log(this.validateForm.value);
+    }
   }
 
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
@@ -34,7 +32,7 @@ export class LoginComponent implements OnInit {
     return {};
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
