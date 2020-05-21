@@ -4,6 +4,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,14 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      console.log(this.validateForm.value);
+      this.http.post(
+        'http://localhost:4200/login-info',
+        this.validateForm.value,
+        { responseType: 'text' }
+      ).subscribe(
+        data => { console.log(data); },
+        error => { console.log("Error", error); }
+      );
     }
   }
 
@@ -32,7 +40,7 @@ export class LoginComponent implements OnInit {
     return {};
   };
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({

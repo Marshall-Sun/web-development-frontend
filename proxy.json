@@ -1,0 +1,10 @@
+{
+  "/login-info": {
+    "target": "http://localhost:8081/",
+    "secure": false
+  },
+  "/register-info": {
+    "target": "http://localhost:8081/",
+    "secure": false
+  }
+}
