@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -16,21 +18,21 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      this.http.post<any>(
-        'http://localhost:4200/login-info',
-        this.validateForm.value
-      ).subscribe(
-        data => {
-          if (!data.exist) {
-            alert('账号不存在！')
-          } else if (!data.rightPass) {
-            alert('密码错误！')
-          } else {
-            alert('登录成功！')
+      this.http.post<any>('http://localhost:4200/login-info', this.validateForm.value)
+        .subscribe(
+          data => {
+            if (!data.exist) {
+              alert('用户不存在！');
+            } else if (!data.rightPass) {
+              alert('密码错误！');
+            } else {
+              this.router.navigateByUrl('/user/' + data.id);
+            }
+          },
+          error => {
+            console.log("Error", error);
           }
-        },
-        error => { console.log("Error", error); }
-      );
+        );
     }
   }
 
@@ -43,7 +45,12 @@ export class LoginComponent implements OnInit {
     return {};
   };
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
