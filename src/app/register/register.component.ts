@@ -1,6 +1,5 @@
 /**
- * TODO: 提交表单，返回信息，跳转
- * TODO: 处理无关函数
+ * TODO: 后台连接
  */
 
 import { Component, OnInit } from '@angular/core';

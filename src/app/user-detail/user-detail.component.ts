@@ -1,7 +1,5 @@
 /**
- * TODO: 绘制用户信息界面
- * TODO: 退出按钮
- * TODO: Session对象，路由守卫
+ * TODO: Session对象
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -12,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
+
+  username: string = '小明';
 
   constructor() { }
 

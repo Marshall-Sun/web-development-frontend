@@ -26,7 +26,9 @@ export class LoginComponent implements OnInit {
             } else if (!data.rightPass) {
               alert('密码错误！');
             } else {
-              this.router.navigateByUrl('/user/' + data.id);
+              console.log(data);
+              
+              this.router.navigateByUrl('/user/' + data.user.id);
             }
           },
           error => {
