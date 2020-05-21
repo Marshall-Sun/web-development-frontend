@@ -2,22 +2,14 @@
 <div class="myform">
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
-      <nz-form-label nzSpan="11" nzFor="email"
-        >📧邮箱</nz-form-label
-      >
-      <nz-form-control
-        nzErrorTip="邮箱格式错误！"
-      >
+      <nz-form-label nzSpan="11" nzFor="email">📧邮箱</nz-form-label>
+      <nz-form-control nzErrorTip="邮箱格式错误！">
         <input nz-input formControlName="email" id="email" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-label nzSpan="11" nzFor="password"
-        >🔑密码</nz-form-label
-      >
-      <nz-form-control
-        nzErrorTip="密码格式错误！"
-      >
+      <nz-form-label nzSpan="11" nzFor="password">🔑密码</nz-form-label>
+      <nz-form-control nzErrorTip="密码格式错误！">
         <input
           nz-input
           type="password"
@@ -29,6 +21,13 @@
     <nz-form-item nz-row class="button-area">
       <nz-form-control>
         <button nz-button nzType="primary">✔️登录</button>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-control>
+        <div id="register">
+          没有账号？<a routerLink="/register">现在注册！</a>
+        </div>
       </nz-form-control>
     </nz-form-item>
   </form>

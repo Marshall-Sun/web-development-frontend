@@ -1,7 +1,3 @@
-/**
- * TODO: 注册按钮
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -20,12 +16,19 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      this.http.post(
+      this.http.post<any>(
         'http://localhost:4200/login-info',
-        this.validateForm.value,
-        { responseType: 'text' }
+        this.validateForm.value
       ).subscribe(
-        data => { console.log(data); },
+        data => {
+          if (!data.exist) {
+            alert('账号不存在！')
+          } else if (!data.rightPass) {
+            alert('密码错误！')
+          } else {
+            alert('登录成功！')
+          }
+        },
         error => { console.log("Error", error); }
       );
     }

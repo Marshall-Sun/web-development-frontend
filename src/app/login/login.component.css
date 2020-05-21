@@ -16,3 +16,7 @@ h1 {
 .myform {
   padding-bottom: 100px;
 }
+
+#register {
+  text-align: center;
+}
