@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -22,13 +22,11 @@ export class LoginComponent implements OnInit {
         .subscribe(
           data => {
             if (!data.exist) {
-              alert('用户不存在！');
+              this.validateForm.controls.email.setErrors({ 'confirm': true });
             } else if (!data.rightPass) {
-              alert('密码错误！');
+              this.validateForm.controls.password.setErrors({ 'confirm': true });
             } else {
-              console.log(data);
-              
-              this.router.navigateByUrl('/user/' + data.user.id);
+              this.router.navigate(['/user'], { queryParams: { id: data.user.id } });
             }
           },
           error => {

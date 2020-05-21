@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,5 +8,4 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-  
 }

@@ -13,7 +13,7 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
-  { path: 'user/:id', component: UserDetailComponent },
+  { path: 'user', component: UserDetailComponent },
   {
     path: '',
     redirectTo: '/login',
