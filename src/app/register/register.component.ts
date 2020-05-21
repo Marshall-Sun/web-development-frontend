@@ -1,9 +1,7 @@
-/**
- * TODO: 后台连接
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +18,19 @@ export class RegisterComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      console.log(this.validateForm.value);
+      this.http.post<any>('http://localhost:4200/register-info', this.validateForm.value)
+        .subscribe(
+          data => {
+            if (!data.success) {
+              this.validateForm.controls.email.setErrors({ 'confirm': true });
+            } else {
+              this.router.navigate(['/user'], { queryParams: { id: data.user.id } });
+            }
+          },
+          error => {
+            console.log("Error", error);
+          }
+        );
     }
   }
 
@@ -37,7 +47,11 @@ export class RegisterComponent implements OnInit {
     return {};
   };
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
+    ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({

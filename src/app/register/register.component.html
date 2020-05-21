@@ -5,11 +5,18 @@
       <nz-form-label nzSpan="11" nzRequired nzFor="email"
         >📧邮箱</nz-form-label
       >
-      <nz-form-control
-        nzErrorTip="邮箱格式错误！"
-      >
+      <nz-form-control [nzErrorTip]="errorMail">
         <input nz-input formControlName="email" id="email" />
+        <ng-template #errorMail let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            邮箱格式错误！
+          </ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">
+            邮箱已经存在！
+          </ng-container>
+        </ng-template>
       </nz-form-control>
+
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzSpan="11" nzFor="password" nzRequired
