@@ -5,20 +5,24 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  registerData;
+  url = 'http://localhost:4200';
+  loginData;
 
   getHttpUser(id) {
-    return this.http.get(`http://localhost:4200/user-info?id=${id}`).toPromise();
+    return this.http.get(`${this.url}/user-info?id=${id}`).toPromise();
   }
 
   postRegister(formValue) {
-    return this.http.post('http://localhost:4200/register-info', formValue).toPromise();
+    return this.http.post(`${this.url}/register-info`, formValue).toPromise();
   }
 
   postLogin(formValue) {
-    return this.http.post('http://localhost:4200/login-info', formValue).toPromise();
+    let res = this.http.post(`${this.url}/login-info`, formValue).toPromise();
+    res.then(
+      data => { this.loginData = data }
+    );
+    return res;
   }
-  
 
   constructor(private http: HttpClient) { }
 }

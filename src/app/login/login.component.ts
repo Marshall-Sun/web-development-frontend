@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   validateForm: FormGroup;
   dataLogin: any = {}
 
-  submitForm(): void {
+  submitForm() {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
