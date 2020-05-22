@@ -3,7 +3,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
@@ -18,11 +18,12 @@ export class UserDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,  
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private router: Router
+    ) { }
 
   logout() {
-    console.log(this.curUser);
+    this.router.navigate(['/']);
   }
 
   ngOnInit(): void {
