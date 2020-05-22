@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,18 +19,22 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-        this.userService.postLogin(this.validateForm.value).then(
-          data => {
-            this.dataLogin = data;
-            if (!this.dataLogin.exist) {
-              this.validateForm.controls.email.setErrors({ 'confirm': true });
-            } else if (!this.dataLogin.rightPass) {
-              this.validateForm.controls.password.setErrors({ 'confirm': true });
-            } else {
-              this.router.navigate(['/user'], { queryParams: { id: this.dataLogin.user.id } });
-            }
+      this.userService.postLogin(this.validateForm.value).then(
+        data => {
+          this.dataLogin = data;
+          if (!this.dataLogin.exist) {
+            this.validateForm.controls.email.setErrors({ 'confirm': true });
+          } else if (!this.dataLogin.rightPass) {
+            this.validateForm.controls.password.setErrors({ 'confirm': true });
+          } else {
+            this.authService.login().subscribe(() => {
+              if (this.authService.isLoggedIn) {
+                this.router.navigate(['/user'], { queryParams: { id: this.dataLogin.user.id } });
+              }
+            });
           }
-        );
+        }
+      );
     }
   }
 
@@ -45,6 +50,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
