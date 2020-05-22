@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
-import { Router, NavigationExtras } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
+  dataLogin: any = {}
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -18,19 +18,16 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      this.http.post<any>('http://localhost:4200/login-info', this.validateForm.value)
-        .subscribe(
+        this.userService.postLogin(this.validateForm.value).then(
           data => {
-            if (!data.exist) {
+            this.dataLogin = data;
+            if (!this.dataLogin.exist) {
               this.validateForm.controls.email.setErrors({ 'confirm': true });
-            } else if (!data.rightPass) {
+            } else if (!this.dataLogin.rightPass) {
               this.validateForm.controls.password.setErrors({ 'confirm': true });
             } else {
-              this.router.navigate(['/user'], { queryParams: { id: data.user.id } });
+              this.router.navigate(['/user'], { queryParams: { id: this.dataLogin.user.id } });
             }
-          },
-          error => {
-            console.log("Error", error);
           }
         );
     }
@@ -48,7 +45,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private http: HttpClient,
     private router: Router
   ) { }
 

@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
-import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,36 +7,18 @@ import { User } from './user';
 export class UserService {
   registerData;
 
-  async getHttpUser(id) {
-    try {
-      let $user = await this.http.get(`http://localhost:4200/user-info?id=${id}`).toPromise();
-      return $user;
-    } catch (e) {
-      console.log(e);
-    }
+  getHttpUser(id) {
+    return this.http.get(`http://localhost:4200/user-info?id=${id}`).toPromise();
   }
 
-  async postRegister(formValue) {
-    try {
-      let $data = await this.http.post('http://localhost:4200/register-info', formValue);
-      return $data;
-    } catch (e) {
-      console.log(e);
-    }
+  postRegister(formValue) {
+    return this.http.post('http://localhost:4200/register-info', formValue).toPromise();
+  }
+
+  postLogin(formValue) {
+    return this.http.post('http://localhost:4200/login-info', formValue).toPromise();
   }
   
-
-  handleRegister(formValue) {
-    Promise.resolve().then(() => {
-      this.http.post<any>('http://localhost:4200/register-info', formValue).toPromise()
-        .then(
-          data => {
-            this.registerData = data;
-          },
-          error => { console.log("Error", error); }
-        );
-    });
-  }
 
   constructor(private http: HttpClient) { }
 }

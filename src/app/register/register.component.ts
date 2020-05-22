@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 
@@ -12,26 +11,24 @@ import { UserService } from '../user.service';
 
 export class RegisterComponent implements OnInit {
   validateForm: FormGroup;
+  dataRegister: any = {}
 
-  submitForm(): void {
+  submitForm() {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      this.http.post<any>('http://localhost:4200/register-info', this.validateForm.value)
-        .subscribe(
-          data => {
-            if (!data.success) {
-              this.validateForm.controls.email.setErrors({ 'confirm': true });
-            } else {
-              this.router.navigate(['/user'], { queryParams: { id: data.user.id } });
-            }
-          },
-          error => {
-            console.log("Error", error);
+      this.userService.postRegister(this.validateForm.value).then(
+        data => {
+          this.dataRegister = data;
+          if (!this.dataRegister.success) {
+            this.validateForm.controls.email.setErrors({ 'confirm': true });
+          } else {
+            this.router.navigate(['/user'], { queryParams: { id: this.dataRegister.user.id } });
           }
-        );
+        }
+      );
     }
   }
 
@@ -50,7 +47,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private router: Router,
     private userService: UserService
   ) { }
