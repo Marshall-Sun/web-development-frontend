@@ -7,23 +7,26 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class UserService {
-  curUser: User;
   registerData;
 
-  initUser(id) {
-    Promise.resolve().then(() => {
-      this.http.get(`http://localhost:4200/user-info?id=${id}`).toPromise()
-        .then(
-          data => {
-            for (const key in data) {
-              this.curUser[key] = data[key];
-            }
-            console.log(this.curUser);
-          },
-          error => { console.log("Error", error); }
-        );
-    });
+  async getHttpUser(id) {
+    try {
+      let $user = await this.http.get(`http://localhost:4200/user-info?id=${id}`).toPromise();
+      return $user;
+    } catch (e) {
+      console.log(e);
+    }
   }
+
+  async postRegister(formValue) {
+    try {
+      let $data = await this.http.post('http://localhost:4200/register-info', formValue);
+      return $data;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  
 
   handleRegister(formValue) {
     Promise.resolve().then(() => {
@@ -37,11 +40,5 @@ export class UserService {
     });
   }
 
-  getCurUser(): User {
-    return this.curUser;
-  }
-
-  constructor(private http: HttpClient) {
-    this.curUser = new User();
-  }
+  constructor(private http: HttpClient) { }
 }

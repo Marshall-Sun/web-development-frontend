@@ -14,10 +14,10 @@ import { UserService } from '../user.service';
 })
 export class UserDetailComponent implements OnInit {
 
-  curUser: User;
+  curUser;
 
   constructor(
-    private route: ActivatedRoute,
+    private route: ActivatedRoute,  
     private userService: UserService
   ) { }
 
@@ -26,7 +26,8 @@ export class UserDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.initUser(this.route.snapshot.queryParamMap.get('id'));
-    this.curUser = this.userService.getCurUser();
+    this.curUser = new User();
+    let id = this.route.snapshot.queryParamMap.get('id');
+    this.userService.getHttpUser(id).then(data => this.curUser = data);
   }
 }
