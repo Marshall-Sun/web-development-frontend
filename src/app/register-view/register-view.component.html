@@ -86,8 +86,32 @@
       </nz-form-control>
     </nz-form-item>
 
+    <nz-form-item>
+      <nz-form-label nzFor="genderGroup" nzRequired>👪性别</nz-form-label>
+      <nz-form-control
+        [nzValidateStatus]="validateForm.controls['genderGroup']"
+        nzErrorTip="请填写性别！"
+      >
+        <nz-radio-group
+          nzName="genderGroup"
+          formControlName="genderGroup"
+          #genderGroup
+        >
+          <label nz-radio nzValue="男" (click)="updateGender(genderGroup)"
+            >男</label
+          >
+          <label nz-radio nzValue="女" (click)="updateGender(genderGroup)"
+            >女</label
+          >
+        </nz-radio-group>
+      </nz-form-control>
+    </nz-form-item>
+
     <nz-form-item nz-row class="button-area">
-      <nz-form-control>
+      <nz-form-control
+        [nzValidateStatus]="validateForm.controls['agree']"
+        nzErrorTip="请同意使用协议！"
+      >
         <label nz-checkbox formControlName="agree">
           <span>同意<a>使用协议</a></span>
         </label>

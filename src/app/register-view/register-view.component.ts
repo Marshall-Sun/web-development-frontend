@@ -14,11 +14,22 @@ export class RegisterViewComponent implements OnInit {
     '🔑密码：',
     '🔑重复密码：',
     '📛昵称：',
-    '📞电话号码：'
+    '📞电话号码：',
+    '👪性别：',
   ];
 
   submitForm() {
-    alert('提交成功！');
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+    if (this.validateForm.valid) {
+      alert('提交成功！');
+    }
+  }
+
+  updateGender(v) {
+    this.update(5, v.value);
   }
 
   update(num: number, value: string) {
@@ -38,6 +49,9 @@ export class RegisterViewComponent implements OnInit {
         break;
       case 4:
         msg = "📞电话号码：";
+        break;
+      case 5:
+        msg = "👪性别：";
         break;
       default:
         break;
@@ -70,7 +84,8 @@ export class RegisterViewComponent implements OnInit {
       nickname: [null, [Validators.required]],
       phoneNumberPrefix: ['+86'],
       phoneNumber: [null, [Validators.required]],
-      agree: [false]
+      genderGroup: [null, [Validators.required]],
+      agree: [null, [Validators.required]]
     });
   }
 }
