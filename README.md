@@ -1,11 +1,6 @@
 Web开发技术-作业1
 ====
 
-在线预览（无后端）
-----
-
-[https://msun.work/web-development-homework1](https://msun.work/web-development-homework1)
-
 本地预览
 ----
 1. 启动后端
@@ -21,19 +16,23 @@ Web开发技术-作业1
     ```
 3. 等待编译完成后转到 [http://localhost:4200](http://localhost:4200) 即可。
 
-登录界面截图
+登录界面
 ----
-![](src\assets\login.png)
++ 在线预览 [https://msun.work/web-development-homework1/login](https://msun.work/web-development-homework1/login)
++ 截图 ![](https://cdn.jsdelivr.net/gh/marshall-sun/web-development-homework1/src/assets/login.png)
 
-注册界面截图
+注册界面
 ----
-![](src\assets\register.png)
++ 在线预览 [https://msun.work/web-development-homework1/register-view](https://msun.work/web-development-homework1/register-view)
++ 截图 ![](https://cdn.jsdelivr.net/gh/marshall-sun/web-development-homework1/src/assets/register.png)
 
-用户界面截图
+用户界面
 ----
-![](src\assets\user-detail.png)
++ 在线预览 [https://msun.work/web-development-homework1/user-detail](https://msun.work/web-development-homework1/user-detail)
++ 截图 ![](https://cdn.jsdelivr.net/gh/marshall-sun/web-development-homework1/src/assets/user-detail.png)
 
-404界面截图
+404界面
 ----
-![](src\assets\404.png)
++ 在线预览 [https://msun.work/web-development-homework1/404](https://msun.work/web-development-homework1/404)
++ 截图 ![](https://cdn.jsdelivr.net/gh/marshall-sun/web-development-homework1/src/assets/404.png)
 
