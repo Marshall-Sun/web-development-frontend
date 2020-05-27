@@ -107,6 +107,18 @@
       </nz-form-control>
     </nz-form-item>
 
+    <nz-form-item>
+      <nz-form-label nzFor="hobbyGroup">&nbsp;💜爱好</nz-form-label>
+      <nz-form-control [nzValidateStatus]="validateForm.controls['hobbyGroup']">
+        <nz-checkbox-group
+          nzName="hobbyGroup"
+          formControlName="hobbyGroup"
+          #hobbyGroup
+          (ngModelChange)="updateHobby(hobbyGroup.options)"
+        ></nz-checkbox-group>
+      </nz-form-control>
+    </nz-form-item>
+
     <nz-form-item nz-row class="button-area">
       <nz-form-control
         [nzValidateStatus]="validateForm.controls['agree']"

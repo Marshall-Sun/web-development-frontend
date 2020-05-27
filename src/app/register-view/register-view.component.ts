@@ -9,6 +9,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 export class RegisterViewComponent implements OnInit {
   validateForm: FormGroup;
+
+  hobbies = [
+    { value: 'Football', label: '足球' },
+    { value: 'Basketball', label: '篮球' },
+    { value: 'Volleyball', label: '排球' },
+    { value: 'Badminton', label: '羽毛球' },
+  ];
+
   data = [
     '📧邮箱：',
     '🔑密码：',
@@ -16,6 +24,7 @@ export class RegisterViewComponent implements OnInit {
     '📛昵称：',
     '📞电话号码：',
     '👪性别：',
+    '💜爱好：'
   ];
 
   submitForm() {
@@ -31,6 +40,22 @@ export class RegisterViewComponent implements OnInit {
   updateGender(v) {
     this.update(5, v.value);
   }
+
+  updateHobby(v) {
+    var str = "";
+    for (const hobby of v) {
+      if (hobby.checked) {
+        str = str + hobby.label + "、";
+      }
+    }
+    console.log('origin', str);
+
+    if (str.lastIndexOf("、") == str.length - 1) {
+      str = str.substring(0, str.length - 1);
+    }
+    this.update(6, str);
+  }
+
 
   update(num: number, value: string) {
     var msg;
@@ -52,6 +77,9 @@ export class RegisterViewComponent implements OnInit {
         break;
       case 5:
         msg = "👪性别：";
+        break;
+      case 6:
+        msg = "💜爱好：";
         break;
       default:
         break;
@@ -85,6 +113,7 @@ export class RegisterViewComponent implements OnInit {
       phoneNumberPrefix: ['+86'],
       phoneNumber: [null, [Validators.required]],
       genderGroup: [null, [Validators.required]],
+      hobbyGroup: [this.hobbies],
       agree: [null, [Validators.required]]
     });
   }
