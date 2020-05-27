@@ -35,4 +35,3 @@ Web开发技术-作业1
 ----
 + 在线预览 [https://msun.work/web-development-homework1/404](https://msun.work/web-development-homework1/404)
 + 截图 ![](https://cdn.jsdelivr.net/gh/marshall-sun/web-development-homework1/src/assets/404.png)
-
