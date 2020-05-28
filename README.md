@@ -28,7 +28,7 @@ Web开发技术-作业1
 
 用户界面
 ----
-+ 在线预览 [https://msun.work/web-development-homework1/user-detail](https://msun.work/web-development-homework1/user-detail)
++ 在线预览 [https://msun.work/web-development-homework1/user/1](https://msun.work/web-development-homework1/user/1)
 + 截图 ![](https://cdn.jsdelivr.net/gh/marshall-sun/web-development-homework1/src/assets/user-detail.png)
 
 404界面
