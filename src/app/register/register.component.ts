@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
           if (!this.dataRegister.success) {
             this.validateForm.controls.email.setErrors({ 'confirm': true });
           } else {
-            this.router.navigate(['/user'], { queryParams: { id: this.dataRegister.user.id } });
+            this.router.navigateByUrl("/login");
           }
         }
       );
