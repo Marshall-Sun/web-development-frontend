@@ -1,14 +1,14 @@
 {
-  "/login-info": {
-    "target": "http://localhost:8081/",
+  "/login": {
+    "target": "http://localhost:3000/",
     "secure": false
   },
-  "/register-info": {
-    "target": "http://localhost:8081/",
+  "/register": {
+    "target": "http://localhost:3000/",
     "secure": false
   },
-  "/user-info": {
-    "target": "http://localhost:8081/",
+  "/users": {
+    "target": "http://localhost:3000/",
     "secure": false
   }
 }

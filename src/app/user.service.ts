@@ -9,15 +9,15 @@ export class UserService {
   loginData;
 
   getHttpUser(id) {
-    return this.http.get(`${this.url}/user-info?id=${id}`).toPromise();
+    return this.http.get(`${this.url}/users/info?id=${id}`).toPromise();
   }
 
   postRegister(formValue) {
-    return this.http.post(`${this.url}/register-info`, formValue).toPromise();
+    return this.http.post(`${this.url}/register/info`, formValue).toPromise();
   }
 
   postLogin(formValue) {
-    let res = this.http.post(`${this.url}/login-info`, formValue).toPromise();
+    let res = this.http.post(`${this.url}/login/info`, formValue).toPromise();
     res.then(
       data => { this.loginData = data }
     );
