@@ -1,5 +1,5 @@
 {
-  "name": "web-development-homework1",
+  "name": "web-development-frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng deploy --base-href=/web-development-homework1"
+    "deploy": "ng deploy --base-href=/web-development-frontend"
   },
   "private": true,
   "dependencies": {
