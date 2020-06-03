@@ -1,15 +1,15 @@
-Web开发技术-作业1
+Web开发技术-作业（前端）
 ====
 
-本地预览
+项目本地预览
 ----
-1. 启动后端
+1. 启动[后端](https://github.com/Marshall-Sun/web-development-backend)
     ```cmd
-    $ cd web-development-frontend
-    $ node src\assets\back-end.js
+    $ cd web-development-backend
+    $ npm start
     ```
 
-2. 启动前端
+2. 启动[前端](https://github.com/Marshall-Sun/web-development-frontend)
     ```cmd
     $ cd web-development-frontend
     $ npm start
