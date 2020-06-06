@@ -1,8 +1,3 @@
-/**
- * TODO: user/:id 仅限数字
- * TODO: 路由守卫
- */
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserDetailComponent } from './user-detail/user-detail.component';
