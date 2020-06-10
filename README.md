@@ -1,20 +1,22 @@
 # Web 开发技术-作业（前端）
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/8a2364d50fdd4f4ca376c8bd22c9e238)](https://www.codacy.com/manual/910204019/web-development-frontend?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Marshall-Sun/web-development-frontend&amp;utm_campaign=Badge_Grade)
+
 ## 项目本地预览
 
 1. 启动[后端](https://github.com/Marshall-Sun/web-development-backend)
 
-    ```cmd
-    cd web-development-backend
-    npm start
-    ```
+   ```cmd
+   cd web-development-backend
+   npm start
+   ```
 
 2. 启动[前端](https://github.com/Marshall-Sun/web-development-frontend)
 
-    ```cmd
-    cd web-development-frontend
-    npm start
-    ```
+   ```cmd
+   cd web-development-frontend
+   npm start
+   ```
 
 3. 等待编译完成后转到 [http://localhost:4200](http://localhost:4200) 即可。
 
