@@ -1,6 +1,8 @@
 # Web 开发技术-作业（前端）
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/8a2364d50fdd4f4ca376c8bd22c9e238)](https://www.codacy.com/manual/910204019/web-development-frontend?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Marshall-Sun/web-development-frontend&amp;utm_campaign=Badge_Grade)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Marshall-Sun/coursetable.svg?logo=lgtm&logoWidth=18&color=blueviolet)](https://lgtm.com/projects/g/Marshall-Sun/coursetable/context:javascript)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/Marshall-Sun/coursetable.svg?logo=lgtm&logoWidth=18&color=blueviolet)](https://lgtm.com/projects/g/Marshall-Sun/coursetable/alerts/)
 
 ## 项目本地预览
 
