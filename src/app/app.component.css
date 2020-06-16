@@ -1,6 +1,9 @@
 nz-content {
   background-image: url("https://cdn.jsdelivr.net/gh/marshall-sun/CDN@1.0/img/angular-bg.jpg");
-  padding-bottom: 100px;
+}
+
+nz-layout {
+  height: 100%;
 }
 
 nz-footer {
@@ -17,7 +20,6 @@ svg {
 
 .ant-layout-footer div {
   font-size: 14px;
-  line-height: 2;
 }
 
 a {

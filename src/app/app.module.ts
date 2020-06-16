@@ -24,7 +24,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterViewComponent } from './register-view/register-view.component';
 
 registerLocaleData(en);
 
@@ -35,7 +34,6 @@ registerLocaleData(en);
     UserDetailComponent,
     PageNotFoundComponent,
     LoginComponent,
-    RegisterViewComponent
   ],
   imports: [
     BrowserModule,
