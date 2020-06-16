@@ -7,10 +7,10 @@ import { AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  styleUrls: ['./user-detail.component.css'],
 })
 export class UserDetailComponent implements OnInit {
-
+  welcomeQuote: string;
   curUser;
 
   constructor(
@@ -18,20 +18,38 @@ export class UserDetailComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   logout() {
     this.authService.logout();
-    window.localStorage.removeItem("id");
-    window.localStorage.removeItem("email");
-    window.localStorage.removeItem("nickname");
+    window.localStorage.removeItem('id');
+    window.localStorage.removeItem('email');
+    window.localStorage.removeItem('nickname');
     this.router.navigate(['/login']);
+  }
+
+  initTime() {
+    let now = new Date().getHours();
+    if (now < 7) {
+      this.welcomeQuote = '凌晨了';
+    } else if (now < 12) {
+      this.welcomeQuote = '早上了';
+    } else if (now < 16) {
+      this.welcomeQuote = '中午了';
+    } else if (now < 19) {
+      this.welcomeQuote = '下午了';
+    } else if (now < 23) {
+      this.welcomeQuote = '晚上了';
+    } else {
+      this.welcomeQuote = '深夜了';
+    }
   }
 
   ngOnInit(): void {
     this.curUser = new User();
-    this.curUser.id = window.localStorage["id"];
-    this.curUser.email = window.localStorage["email"];
-    this.curUser.nickname = window.localStorage["nickname"];
+    this.curUser.id = window.localStorage['id'];
+    this.curUser.email = window.localStorage['email'];
+    this.curUser.nickname = window.localStorage['nickname'];
+    this.initTime();
   }
 }
