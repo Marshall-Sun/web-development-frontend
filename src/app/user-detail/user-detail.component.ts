@@ -22,12 +22,16 @@ export class UserDetailComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/']);
+    window.localStorage.removeItem("id");
+    window.localStorage.removeItem("email");
+    window.localStorage.removeItem("nickname");
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {
     this.curUser = new User();
-    let id = this.route.snapshot.queryParamMap.get('id');
-    this.userService.getHttpUser(id).then(data => this.curUser = data);
+    this.curUser.id = window.localStorage["id"];
+    this.curUser.email = window.localStorage["email"];
+    this.curUser.nickname = window.localStorage["nickname"];
   }
 }

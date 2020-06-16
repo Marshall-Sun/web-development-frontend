@@ -10,6 +10,7 @@ import { AuthService } from '../auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  isOkLoading = false;
   validateForm: FormGroup;
   dataLogin: any = {}
 
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
+      this.isOkLoading = true;
       this.userService.postLogin(this.validateForm.value).then(
         data => {
           this.dataLogin = data;
@@ -29,7 +31,10 @@ export class LoginComponent implements OnInit {
           } else {
             this.authService.login().subscribe(() => {
               if (this.authService.isLoggedIn) {
-                this.router.navigate(['/user'], { queryParams: { id: this.dataLogin.user.id } });
+                window.localStorage["id"] = this.dataLogin.user.id;
+                window.localStorage["email"] = this.dataLogin.user.email;
+                window.localStorage["nickname"] = this.dataLogin.user.nickname;
+                this.router.navigate(['/user']);
               }
             });
           }

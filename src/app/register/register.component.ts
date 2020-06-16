@@ -10,6 +10,7 @@ import { UserService } from '../user.service';
 })
 
 export class RegisterComponent implements OnInit {
+  isOkLoading = false;
   validateForm: FormGroup;
   dataRegister: any = {}
 
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
+      this.isOkLoading = true;
       this.userService.postRegister(this.validateForm.value).then(
         data => {
           this.dataRegister = data;
