@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -29,14 +28,10 @@ export class LoginComponent implements OnInit {
           } else if (!this.dataLogin.rightPass) {
             this.validateForm.controls.password.setErrors({ 'confirm': true });
           } else {
-            this.authService.login().subscribe(() => {
-              if (this.authService.isLoggedIn) {
-                window.localStorage["id"] = this.dataLogin.user.id;
-                window.localStorage["email"] = this.dataLogin.user.email;
-                window.localStorage["nickname"] = this.dataLogin.user.nickname;
-                this.router.navigate(['/user']);
-              }
-            });
+            window.localStorage["id"] = this.dataLogin.user.id;
+            window.localStorage["email"] = this.dataLogin.user.email;
+            window.localStorage["nickname"] = this.dataLogin.user.nickname;
+            this.router.navigate(['/user']);
           }
         }
       );
@@ -55,7 +50,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private authService: AuthService,
     private router: Router
   ) { }
 

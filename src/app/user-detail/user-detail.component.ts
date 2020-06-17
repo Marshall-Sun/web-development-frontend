@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -16,12 +15,10 @@ export class UserDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private authService: AuthService,
     private router: Router
   ) {}
 
   logout() {
-    this.authService.logout();
     window.localStorage.removeItem('id');
     window.localStorage.removeItem('email');
     window.localStorage.removeItem('nickname');

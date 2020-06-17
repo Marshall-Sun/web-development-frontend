@@ -10,21 +10,21 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: '/user',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
     component: LoginComponent,
-    data: { title: 'Users List' }
+    data: { title: 'Users List' },
+    canActivate: [AuthGuard],
   },
-  { path: 'register', component: RegisterComponent },
-  { path: 'user', component: UserDetailComponent, canActivate: [AuthGuard], },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserDetailComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   exports: [RouterModule],
-  imports: [RouterModule.forRoot(routes)]
+  imports: [RouterModule.forRoot(routes)],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}
