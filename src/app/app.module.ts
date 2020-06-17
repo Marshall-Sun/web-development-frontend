@@ -24,6 +24,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { UserListComponent } from './user-detail/user-list/user-list.component';
+import { ItemListComponent } from './user-detail/item-list/item-list.component';
 
 registerLocaleData(en);
 
@@ -34,6 +37,8 @@ registerLocaleData(en);
     UserDetailComponent,
     PageNotFoundComponent,
     LoginComponent,
+    UserListComponent,
+    ItemListComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ registerLocaleData(en);
     AppRoutingModule,
     NzListModule,
     NzRadioModule,
+    NzMenuModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

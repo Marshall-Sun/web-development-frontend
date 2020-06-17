@@ -27,11 +27,11 @@ export class UserDetailComponent implements OnInit {
 
   initTime() {
     let now = new Date().getHours();
-    if (now < 7) {
+    if (3 < now && now < 6) {
       this.welcomeQuote = '凌晨了';
     } else if (now < 12) {
       this.welcomeQuote = '早上了';
-    } else if (now < 16) {
+    } else if (now < 15) {
       this.welcomeQuote = '中午了';
     } else if (now < 19) {
       this.welcomeQuote = '下午了';
