@@ -1,13 +1,5 @@
-input {
-  width: 220px;
-}
-
-.phone-input {
-  max-width: 220px;
-}
-
-.phone-select {
-  width: 70px;
+input, #select {
+  width: 200px;
 }
 
 .button-area {
