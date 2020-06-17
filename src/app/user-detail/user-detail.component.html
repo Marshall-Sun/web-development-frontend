@@ -1,16 +1,19 @@
 <div id="content">
-  <div>
-    <h1>{{ curUser.nickname }}，{{ welcomeQuote }}，喝杯咖啡如何？☕</h1>
-    <button nz-button nzType="default" (click)="logout()">注销</button>
+  <h1>{{ curUser.nickname }}，{{ welcomeQuote }}，喝杯咖啡如何？☕</h1>
+
+  <div id="mainlist">
+    <ul nz-menu nzMode="horizontal" id="menu">
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/', 'user', 'userList']">人员列表</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/', 'user', 'itemList']">商品列表</a>
+      </li>
+    </ul>
+    <router-outlet></router-outlet>
   </div>
 
-  <ul nz-menu nzMode="horizontal" id="menu">
-    <li nz-menu-item nzMatchRouter>
-      <a [routerLink]="['/', 'user', 'userList']">部门人员列表</a>
-    </li>
-    <li nz-menu-item nzMatchRouter>
-      <a [routerLink]="['/', 'user', 'itemList']">商品列表</a>
-    </li>
-  </ul>
-  <router-outlet></router-outlet>
+  <div>
+    <button nz-button nzType="default" (click)="logout()">注销</button>
+  </div>
 </div>

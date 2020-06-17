@@ -27,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { UserListComponent } from './user-detail/user-list/user-list.component';
 import { ItemListComponent } from './user-detail/item-list/item-list.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 registerLocaleData(en);
 
@@ -56,6 +57,7 @@ registerLocaleData(en);
     NzListModule,
     NzRadioModule,
     NzMenuModule,
+    NzTableModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
