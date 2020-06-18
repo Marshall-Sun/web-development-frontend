@@ -1,4 +1,10 @@
-<nz-table #filterTable [nzData]="listOfData" nzTableLayout="fixed" nzShowPagination="false">
+<nz-table
+  #filterTable
+  [nzData]="listOfData"
+  nzTableLayout="fixed"
+  nzShowPagination="false"
+  [nzScroll]="{ y: '350px' }"
+>
   <thead>
     <tr>
       <th
@@ -16,13 +22,70 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of filterTable.data">
-      <td>{{ data.id }}</td>
-      <td>{{ data.email }}</td>
-      <td>{{ data.password }}</td>
-      <td>{{ data.nickname }}</td>
-      <td>{{ data.deptname }}</td>
-      <td>{{ data.shopname }}</td>
-      <td>{{ data.ismanager ? '✔️' : '' }}</td>
+      <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
+        <td>{{ data.id }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.password }}</td>
+        <td>{{ data.nickname }}</td>
+        <td>{{ data.deptname }}</td>
+        <td>{{ data.shopname }}</td>
+        <td>{{ data.ismanager ? "✔️" : "" }}</td>
+        <td>
+          <a (click)="startEdit(data.id)">编辑</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="deleteUser(data.id)">删除</a>
+        </td>
+      </ng-container>
+      <ng-template #editTemplate>
+        <td>{{ data.id }}</td>
+        <td>
+          <input
+            type="text"
+            nz-input
+            [(ngModel)]="editCache[data.id].data.email"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            nz-input
+            [(ngModel)]="editCache[data.id].data.password"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            nz-input
+            [(ngModel)]="editCache[data.id].data.nickname"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            nz-input
+            [(ngModel)]="editCache[data.id].data.deptname"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            nz-input
+            [(ngModel)]="editCache[data.id].data.shopname"
+          />
+        </td>
+        <td>{{ data.ismanager ? "✔️" : "" }}</td>
+        <td>
+          <a (click)="saveEdit(data.id)" class="save">保存</a>
+          <a
+            nz-popconfirm
+            nzTitle="确定放弃更改？"
+            nzOkText="确定"
+            nzCancelText="取消"
+            (nzOnConfirm)="cancelEdit(data.id)"
+            >放弃</a
+          >
+        </td>
+      </ng-template>
     </tr>
   </tbody>
 </nz-table>

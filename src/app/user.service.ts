@@ -11,6 +11,14 @@ export class UserService {
     return this.http.get(`${this.url}/users/info`).toPromise();
   }
 
+  updateUser(newUser) {
+    return this.http.post(`${this.url}/users/update`, newUser).toPromise();
+  }
+
+  deleteUser(id) {
+    return this.http.post(`${this.url}/users/delete`, id).toPromise();
+  }
+  
   postRegister(formValue) {
     return this.http.post(`${this.url}/register/info`, formValue).toPromise();
   }

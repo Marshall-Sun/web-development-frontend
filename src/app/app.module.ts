@@ -28,6 +28,9 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { UserListComponent } from './user-detail/user-list/user-list.component';
 import { ItemListComponent } from './user-detail/item-list/item-list.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 registerLocaleData(en);
 
@@ -58,6 +61,9 @@ registerLocaleData(en);
     NzRadioModule,
     NzMenuModule,
     NzTableModule,
+    NzPopconfirmModule,
+    NzMessageModule,
+    NzDividerModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

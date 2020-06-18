@@ -6,6 +6,7 @@ import {
   NzTableSortOrder,
 } from 'ng-zorro-antd/table';
 import { UserService } from 'src/app/user.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 interface DataItem {
   id: number;
@@ -33,15 +34,21 @@ interface ColumnItem {
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  editCache: { [key: number]: { edit: boolean; data: DataItem } } = {};
+  listOfData: any = [];
+  editResult: any = {};
+
+  constructor(
+    private userService: UserService,
+    private message: NzMessageService
+    ) {}
 
   ngOnInit(): void {
     this.userService.getUsers().then((data) => {
       this.listOfData = data;
+      this.updateEditCache();
     });
   }
-
-  listOfData: any = [];
 
   listOfColumns: ColumnItem[] = [
     {
@@ -81,9 +88,63 @@ export class UserListComponent implements OnInit {
         list.some((shopname) => item.shopname.indexOf(shopname) !== -1),
     },
     {
-      name: '是否为经理',
+      name: '管理员权限',
       sortFn: (a: DataItem, b: DataItem) =>
         Number(a.ismanager) - Number(b.ismanager),
     },
+    {
+      name: '操作',
+    },
   ];
+
+  startEdit(id: number): void {
+    this.editCache[id].edit = true;
+  }
+
+  cancelEdit(id: number): void {
+    const index = this.listOfData.findIndex((item) => item.id === id);
+    this.editCache[id] = {
+      data: { ...this.listOfData[index] },
+      edit: false,
+    };
+  }
+
+  saveEdit(id: number): void {
+    const index = this.listOfData.findIndex((item) => item.id === id);
+    Object.assign(this.listOfData[index], this.editCache[id].data);
+    this.editCache[id].edit = false;
+
+    this.userService.updateUser(this.listOfData[index]).then((data) => {
+      this.editResult = data;
+      if (this.editResult.success) {
+        this.message.create('success', '修改成功');
+      } else {
+        this.message.create('error', '修改失败');
+      }
+    });
+  }
+
+  deleteUser(id: number): void {
+    const index = this.listOfData.findIndex((item) => item.id === id);
+
+    this.userService.deleteUser({id}).then((data) => {
+      this.editResult = data;
+      if (this.editResult.success) {
+        this.listOfData.splice(index, 1);
+        this.ngOnInit();
+        this.message.create('success', '删除成功');
+      } else {
+        this.message.create('error', '删除失败');
+      }
+    });
+  }
+
+  updateEditCache(): void {
+    this.listOfData.forEach((item) => {
+      this.editCache[item.id] = {
+        edit: false,
+        data: { ...item },
+      };
+    });
+  }
 }
