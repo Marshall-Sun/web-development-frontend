@@ -2,12 +2,13 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
+  height: 100%;
 }
 
-h1 {
+/* h1 {
   margin-top: 10px;
-}
+} */
 
 #mainlist {
   background-color: whitesmoke;

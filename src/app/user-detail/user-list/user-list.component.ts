@@ -5,11 +5,16 @@ import {
   NzTableSortFn,
   NzTableSortOrder,
 } from 'ng-zorro-antd/table';
+import { UserService } from 'src/app/user.service';
 
 interface DataItem {
-  name: string;
-  age: number;
-  address: string;
+  id: number;
+  email: string;
+  password: string;
+  nickname: string;
+  deptname: string;
+  shopname: string;
+  ismanager: boolean;
 }
 
 interface ColumnItem {
@@ -28,63 +33,57 @@ interface ColumnItem {
   styleUrls: ['./user-list.component.css'],
 })
 export class UserListComponent implements OnInit {
-  constructor() {}
+  constructor(private userService: UserService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.getUsers().then((data) => {
+      this.listOfData = data;
+    });
+  }
+
+  listOfData: any = [];
 
   listOfColumns: ColumnItem[] = [
     {
-      name: 'Name',
-      sortOrder: null,
-      sortFn: (a: DataItem, b: DataItem) => a.name.localeCompare(b.name),
+      name: '员工编号',
+      sortFn: (a: DataItem, b: DataItem) => a.id - b.id,
+    },
+    {
+      name: '邮箱',
+      sortFn: (a: DataItem, b: DataItem) => a.email.localeCompare(b.email),
+    },
+    {
+      name: '密码',
+      sortFn: (a: DataItem, b: DataItem) =>
+        a.password.localeCompare(b.password),
+    },
+    {
+      name: '昵称',
+    },
+    {
+      name: '部门',
       filterMultiple: true,
       listOfFilter: [
-        { text: 'Joe', value: 'Joe' },
-        { text: 'Jim', value: 'Jim' },
+        { text: '管理部', value: '管理部' },
+        { text: '销售部', value: '销售部' },
       ],
       filterFn: (list: string[], item: DataItem) =>
-        list.some((name) => item.name.indexOf(name) !== -1),
+        list.some((deptname) => item.deptname.indexOf(deptname) !== -1),
     },
     {
-      name: 'Age',
-      sortOrder: 'descend',
-      sortFn: (a: DataItem, b: DataItem) => a.age - b.age,
-      sortDirections: ['descend', null],
-    },
-    {
-      name: 'Address',
-      sortOrder: null,
-      sortFn: (a: DataItem, b: DataItem) => a.address.length - b.address.length,
-      filterMultiple: false,
+      name: '店铺',
+      filterMultiple: true,
       listOfFilter: [
-        { text: 'London', value: 'London' },
-        { text: 'Sidney', value: 'Sidney' },
+        { text: '商店1', value: '商店1' },
+        { text: '商店2', value: '商店2' },
       ],
-      filterFn: (address: string, item: DataItem) =>
-        item.address.indexOf(address) !== -1,
-    },
-  ];
-  
-  listOfData: DataItem[] = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
+      filterFn: (list: string[], item: DataItem) =>
+        list.some((shopname) => item.shopname.indexOf(shopname) !== -1),
     },
     {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-    },
-    {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park',
+      name: '是否为经理',
+      sortFn: (a: DataItem, b: DataItem) =>
+        Number(a.ismanager) - Number(b.ismanager),
     },
   ];
 }
