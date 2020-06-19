@@ -41,7 +41,7 @@ export class UserListComponent implements OnInit {
   constructor(
     private userService: UserService,
     private message: NzMessageService
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.userService.getUsers().then((data) => {
@@ -98,6 +98,18 @@ export class UserListComponent implements OnInit {
   ];
 
   startEdit(id: number): void {
+    if (window.localStorage['ismanager'] != '1') {
+      this.message.create('error', '无管理员权限');
+      return;
+    }
+
+    const index = this.listOfData.findIndex((item) => item.id === id);
+
+    if (window.localStorage['shopname'] != this.listOfData[index].shopname) {
+      this.message.create('error', '无对应商店管理权限');
+      return;
+    }
+
     this.editCache[id].edit = true;
   }
 
@@ -117,7 +129,11 @@ export class UserListComponent implements OnInit {
     this.userService.updateUser(this.listOfData[index]).then((data) => {
       this.editResult = data;
       if (this.editResult.success) {
-        this.message.create('success', '修改成功');
+        if (id == window.localStorage['id']) {
+          this.message.create('success', '修改自身信息成功，重新登录后生效');
+        } else {
+          this.message.create('success', '修改成功');
+        }
       } else {
         this.message.create('error', '修改失败');
       }
@@ -125,9 +141,24 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(id: number): void {
+    if (window.localStorage['ismanager'] != '1') {
+      this.message.create('error', '无管理员权限');
+      return;
+    }
+
+    if (id == window.localStorage['id']) {
+      this.message.create('error', '不能删除自己');
+      return;
+    }
+
     const index = this.listOfData.findIndex((item) => item.id === id);
 
-    this.userService.deleteUser({id}).then((data) => {
+    if (window.localStorage['shopname'] != this.listOfData[index].shopname) {
+      this.message.create('error', '无对应商店管理权限');
+      return;
+    }
+
+    this.userService.deleteUser({ id }).then((data) => {
       this.editResult = data;
       if (this.editResult.success) {
         this.listOfData.splice(index, 1);

@@ -22,6 +22,9 @@ export class UserDetailComponent implements OnInit {
     window.localStorage.removeItem('id');
     window.localStorage.removeItem('email');
     window.localStorage.removeItem('nickname');
+    window.localStorage.removeItem('deptname');
+    window.localStorage.removeItem('shopname');
+    window.localStorage.removeItem('ismanager');
     this.router.navigate(['/login']);
   }
 
@@ -47,6 +50,9 @@ export class UserDetailComponent implements OnInit {
     this.curUser.id = window.localStorage['id'];
     this.curUser.email = window.localStorage['email'];
     this.curUser.nickname = window.localStorage['nickname'];
+    this.curUser.deptname = window.localStorage['deptname'];
+    this.curUser.shopname = window.localStorage['shopname'];
+    this.curUser.ismanager = window.localStorage['ismanager'];
     this.initTime();
   }
 }

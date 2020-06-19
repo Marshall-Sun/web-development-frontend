@@ -37,6 +37,9 @@ export class LoginComponent implements OnInit {
           window.localStorage['id'] = this.dataLogin.user.id;
           window.localStorage['email'] = this.dataLogin.user.email;
           window.localStorage['nickname'] = this.dataLogin.user.nickname;
+          window.localStorage['deptname'] = this.dataLogin.user.deptname;
+          window.localStorage['shopname'] = this.dataLogin.user.shopname;
+          window.localStorage['ismanager'] = this.dataLogin.user.ismanager;
           this.router.navigate(['/user']);
         }
       });

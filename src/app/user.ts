@@ -3,13 +3,17 @@ export class User {
   email: string
   password: string;
   nickname: string;
-  data: [];
+  deptname: string;
+  shopname: string;
+  ismanager: boolean;
 
   constructor() {
     this.id = null;
     this.email = null;
     this.password = null;
     this.nickname = null;
-    this.data = [];
+    this.deptname = null;
+    this.shopname = null;
+    this.ismanager = false;
   }
 }
