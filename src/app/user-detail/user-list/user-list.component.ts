@@ -73,6 +73,7 @@ export class UserListComponent implements OnInit {
       listOfFilter: [
         { text: '管理部', value: '管理部' },
         { text: '销售部', value: '销售部' },
+        { text: '后勤部', value: '后勤部' },
       ],
       filterFn: (list: string[], item: DataItem) =>
         list.some((deptname) => item.deptname.indexOf(deptname) !== -1),

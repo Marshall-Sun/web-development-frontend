@@ -1,9 +1,10 @@
 nz-content {
-  background-image: url("https://cdn.jsdelivr.net/gh/marshall-sun/CDN@1.0/img/angular-bg.jpg");
+  background-image: url("https://cdn.jsdelivr.net/gh/marshall-sun/CDN@latest/coursetable/arches.png");
+  background-color: aliceblue;
 }
 
 nz-layout {
-  height: 100%;
+  min-height: 100%;
 }
 
 nz-footer {

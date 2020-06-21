@@ -2,8 +2,7 @@
   #filterTable
   [nzData]="listOfData"
   nzTableLayout="fixed"
-  nzShowPagination="false"
-  [nzScroll]="{ y: '350px' }"
+  nzPageSize="10"
 >
   <thead>
     <tr>
@@ -76,6 +75,7 @@
         <td>{{ data.ismanager ? "✔️" : "" }}</td>
         <td>
           <a (click)="saveEdit(data.id)" class="save">保存</a>
+          <nz-divider nzType="vertical"></nz-divider>
           <a
             nz-popconfirm
             nzTitle="确定放弃更改？"

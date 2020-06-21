@@ -31,6 +31,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 registerLocaleData(en);
 
@@ -63,7 +64,8 @@ registerLocaleData(en);
     NzTableModule,
     NzPopconfirmModule,
     NzMessageModule,
-    NzDividerModule
+    NzDividerModule,
+    NzCardModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

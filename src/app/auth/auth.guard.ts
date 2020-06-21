@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
     if (typeof window.localStorage['id'] == 'undefined') {
       return true;
     }
-    this.router.navigate(['/user']);
+    this.router.navigate(['/user/userList']);
     return false;
   }
 

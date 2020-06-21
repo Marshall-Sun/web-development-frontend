@@ -1,0 +1,7 @@
+.ant-table-cell {
+  text-align: center;
+}
+
+.ant-table-pagination.ant-table-pagination-right.ant-pagination.ng-star-inserted {
+  margin-right: 1%;
+}

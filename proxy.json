@@ -10,5 +10,9 @@
   "/users": {
     "target": "http://localhost:3000/",
     "secure": false
+  },
+  "/items": {
+    "target": "http://localhost:3000/",
+    "secure": false
   }
 }
