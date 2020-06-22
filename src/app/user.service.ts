@@ -6,22 +6,38 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
   url = 'http://localhost:4200';
-  loginData;
 
-  getHttpUser(id) {
-    return this.http.get(`${this.url}/users/info?id=${id}`).toPromise();
+  getUsers() {
+    return this.http.get(`${this.url}/users/info`).toPromise();
   }
 
+  updateUser(newUser) {
+    return this.http.post(`${this.url}/users/update`, newUser).toPromise();
+  }
+
+  deleteUser(id) {
+    return this.http.post(`${this.url}/users/delete`, id).toPromise();
+  }
+
+  getItems() {
+    return this.http.get(`${this.url}/items/info`).toPromise();
+  }
+
+  updateItem(newItem) {
+    return this.http.post(`${this.url}/items/update`, newItem).toPromise();
+  }
+
+  deleteItem(id) {
+    return this.http.post(`${this.url}/items/delete`, id).toPromise();
+  }
+  
+  
   postRegister(formValue) {
     return this.http.post(`${this.url}/register/info`, formValue).toPromise();
   }
 
   postLogin(formValue) {
-    let res = this.http.post(`${this.url}/login/info`, formValue).toPromise();
-    res.then(
-      data => { this.loginData = data }
-    );
-    return res;
+    return this.http.post(`${this.url}/login/info`, formValue).toPromise();
   }
 
   constructor(private http: HttpClient) { }

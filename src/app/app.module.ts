@@ -24,7 +24,14 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterViewComponent } from './register-view/register-view.component';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { UserListComponent } from './user-detail/user-list/user-list.component';
+import { ItemListComponent } from './user-detail/item-list/item-list.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 registerLocaleData(en);
 
@@ -35,7 +42,8 @@ registerLocaleData(en);
     UserDetailComponent,
     PageNotFoundComponent,
     LoginComponent,
-    RegisterViewComponent
+    UserListComponent,
+    ItemListComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +60,12 @@ registerLocaleData(en);
     AppRoutingModule,
     NzListModule,
     NzRadioModule,
+    NzMenuModule,
+    NzTableModule,
+    NzPopconfirmModule,
+    NzMessageModule,
+    NzDividerModule,
+    NzCardModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

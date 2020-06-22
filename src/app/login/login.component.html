@@ -1,4 +1,4 @@
-<h1>🖥️登录系统</h1>
+<h1>🖥️登录后台系统</h1>
 <div class="myform">
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
@@ -8,10 +8,13 @@
         <input nz-input formControlName="email" id="email" />
         <ng-template #errorMail let-control>
           <ng-container *ngIf="control.hasError('confirm')">
-            邮箱不存在！
+            邮箱不存在
+          </ng-container>
+          <ng-container *ngIf="control.hasError('email')">
+            邮箱格式错误
           </ng-container>
           <ng-container *ngIf="control.hasError('required')">
-            邮箱格式错误！
+            请填写邮箱
           </ng-container>
         </ng-template>
       </nz-form-control>
@@ -28,10 +31,10 @@
         />
         <ng-template #errorTpl let-control>
           <ng-container *ngIf="control.hasError('confirm')">
-            密码错误！
+            密码错误
           </ng-container>
           <ng-container *ngIf="control.hasError('required')">
-            密码格式错误！
+            请填写密码
           </ng-container>
         </ng-template>
       </nz-form-control>
@@ -39,7 +42,7 @@
 
     <nz-form-item nz-row class="button-area">
       <nz-form-control>
-        <button nz-button nzType="primary">✔️登录</button>
+        <button nz-button nzType="primary" [nzLoading]="isOkLoading">✔️登录</button>
       </nz-form-control>
     </nz-form-item>
 

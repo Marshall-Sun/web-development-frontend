@@ -1,13 +1,17 @@
 {
-  "/login/info": {
+  "/login": {
     "target": "http://localhost:3000/",
     "secure": false
   },
-  "/register/info": {
+  "/register": {
     "target": "http://localhost:3000/",
     "secure": false
   },
-  "/users/info": {
+  "/users": {
+    "target": "http://localhost:3000/",
+    "secure": false
+  },
+  "/items": {
     "target": "http://localhost:3000/",
     "secure": false
   }

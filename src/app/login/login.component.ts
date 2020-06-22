@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  isOkLoading = false;
   validateForm: FormGroup;
-  dataLogin: any = {}
+  dataLogin: any = {};
 
   submitForm() {
     for (const i in this.validateForm.controls) {
@@ -19,22 +24,25 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      this.userService.postLogin(this.validateForm.value).then(
-        data => {
-          this.dataLogin = data;
-          if (!this.dataLogin.exist) {
-            this.validateForm.controls.email.setErrors({ 'confirm': true });
-          } else if (!this.dataLogin.rightPass) {
-            this.validateForm.controls.password.setErrors({ 'confirm': true });
-          } else {
-            this.authService.login().subscribe(() => {
-              if (this.authService.isLoggedIn) {
-                this.router.navigate(['/user'], { queryParams: { id: this.dataLogin.user.id } });
-              }
-            });
-          }
+      this.isOkLoading = true;
+      this.userService.postLogin(this.validateForm.value).then((data) => {
+        this.dataLogin = data;
+        if (!this.dataLogin.exist) {
+          this.validateForm.controls.email.setErrors({ confirm: true });
+          this.isOkLoading = false;
+        } else if (!this.dataLogin.rightPass) {
+          this.validateForm.controls.password.setErrors({ confirm: true });
+          this.isOkLoading = false;
+        } else {
+          window.localStorage['id'] = this.dataLogin.user.id;
+          window.localStorage['email'] = this.dataLogin.user.email;
+          window.localStorage['nickname'] = this.dataLogin.user.nickname;
+          window.localStorage['deptname'] = this.dataLogin.user.deptname;
+          window.localStorage['shopname'] = this.dataLogin.user.shopname;
+          window.localStorage['ismanager'] = this.dataLogin.user.ismanager;
+          this.router.navigate(['/user']);
         }
-      );
+      });
     }
   }
 
@@ -50,9 +58,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({

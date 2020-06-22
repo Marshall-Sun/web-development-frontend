@@ -1,5 +1,18 @@
 <div id="content">
-  <h1>{{ curUser.nickname }}，喝杯咖啡如何？☕</h1>
+  <h1>{{ curUser.nickname }}，{{ welcomeQuote }}，喝杯咖啡如何？☕</h1>
+
+  <div id="mainlist">
+    <ul nz-menu nzMode="horizontal" id="menu">
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/', 'user', 'userList']">人事管理</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/', 'user', 'itemList']">商品管理</a>
+      </li>
+    </ul>
+    <router-outlet></router-outlet>
+  </div>
+
   <div>
     <button nz-button nzType="default" (click)="logout()">注销</button>
   </div>

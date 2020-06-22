@@ -1,0 +1,7 @@
+.ant-table-cell {
+  text-align: center;
+}
+
+nz-pagination.ant-table-pagination.ant-pagination {
+  margin: 16px 16px;
+}

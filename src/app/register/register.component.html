@@ -1,4 +1,4 @@
-<h1>🖥️注册系统</h1>
+<h1>🖥️注册后台账号</h1>
 <div class="myform">
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
     <nz-form-item>
@@ -8,11 +8,14 @@
       <nz-form-control [nzErrorTip]="errorMail">
         <input nz-input formControlName="email" id="email" />
         <ng-template #errorMail let-control>
-          <ng-container *ngIf="control.hasError('required')">
-            邮箱格式错误！
-          </ng-container>
           <ng-container *ngIf="control.hasError('confirm')">
-            邮箱已经存在！
+            邮箱已存在
+          </ng-container>
+          <ng-container *ngIf="control.hasError('email')">
+            邮箱格式错误
+          </ng-container>
+          <ng-container *ngIf="control.hasError('required')">
+            请填写邮箱
           </ng-container>
         </ng-template>
       </nz-form-control>
@@ -23,7 +26,7 @@
         >🔑密码</nz-form-label
       >
       <nz-form-control
-        nzErrorTip="密码格式错误！"
+        nzErrorTip="请填写密码"
       >
         <input
           nz-input
@@ -48,10 +51,10 @@
         />
         <ng-template #errorTpl let-control>
           <ng-container *ngIf="control.hasError('required')">
-            密码格式错误！
+            请重复填写密码
           </ng-container>
           <ng-container *ngIf="control.hasError('confirm')">
-            密码不一致！
+            密码不一致
           </ng-container>
         </ng-template>
       </nz-form-control>
@@ -61,39 +64,41 @@
       <nz-form-label nzSpan="11" nzFor="nickname" nzRequired>
         <span>
           📛昵称
-          <i
-            nz-icon
-            nz-tooltip
-            nzTitle="What do you want other to call you"
-            nzType="question-circle"
-            nzTheme="outline"
-          ></i>
         </span>
       </nz-form-label>
       <nz-form-control
-        nzErrorTip="昵称格式错误！"
+        nzErrorTip="请填写昵称"
       >
         <input nz-input id="nickname" formControlName="nickname" />
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label nzSpan="11" nzFor="phoneNumber" nzRequired
-        >📞电话号码</nz-form-label
+      <nz-form-label nzSpan="11" nzFor="shopname" nzRequired
+        >🏬店铺</nz-form-label
       >
       <nz-form-control
-        [nzValidateStatus]="validateForm.controls['phoneNumber']"
-        nzErrorTip="电话号码格式错误！"
-        class="phone-input"
+        nzErrorTip="请选择店铺"
       >
-        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-          <ng-template #addOnBeforeTemplate>
-            <nz-select formControlName="phoneNumberPrefix" class="phone-select">
-              <nz-option nzLabel="+86" nzValue="+86"></nz-option>
-            </nz-select>
-          </ng-template>
-          <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
-        </nz-input-group>
+        <nz-select formControlName="shopname" class="select">
+          <nz-option nzLabel="商店1" nzValue="商店1"></nz-option>
+          <nz-option nzLabel="商店2" nzValue="商店2"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label nzSpan="11" nzFor="deptname" nzRequired
+        >👨‍👦‍👦部门</nz-form-label
+      >
+      <nz-form-control
+        nzErrorTip="请选择部门"
+      >
+        <nz-select formControlName="deptname" class="select">
+          <nz-option nzLabel="管理部" nzValue="管理部"></nz-option>
+          <nz-option nzLabel="销售部" nzValue="销售部"></nz-option>
+          <nz-option nzLabel="后勤部" nzValue="后勤部"></nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
     
@@ -106,7 +111,7 @@
     </nz-form-item>
     <nz-form-item nz-row class="button-area">
       <nz-form-control>
-        <button nz-button nzType="primary">✔️注册</button>
+        <button nz-button nzType="primary" [nzLoading]="isOkLoading">✔️注册</button>
       </nz-form-control>
     </nz-form-item>
   </form>

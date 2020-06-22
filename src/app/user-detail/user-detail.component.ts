@@ -2,32 +2,57 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  styleUrls: ['./user-detail.component.css'],
 })
 export class UserDetailComponent implements OnInit {
-
+  welcomeQuote: string;
   curUser;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/']);
+    window.localStorage.removeItem('id');
+    window.localStorage.removeItem('email');
+    window.localStorage.removeItem('nickname');
+    window.localStorage.removeItem('deptname');
+    window.localStorage.removeItem('shopname');
+    window.localStorage.removeItem('ismanager');
+    this.router.navigate(['/login']);
+  }
+
+  initTime() {
+    let now = new Date().getHours();
+    if (3 < now && now < 6) {
+      this.welcomeQuote = '凌晨了';
+    } else if (now < 12) {
+      this.welcomeQuote = '早上了';
+    } else if (now < 15) {
+      this.welcomeQuote = '中午了';
+    } else if (now < 19) {
+      this.welcomeQuote = '下午了';
+    } else if (now < 23) {
+      this.welcomeQuote = '晚上了';
+    } else {
+      this.welcomeQuote = '深夜了';
+    }
   }
 
   ngOnInit(): void {
     this.curUser = new User();
-    let id = this.route.snapshot.queryParamMap.get('id');
-    this.userService.getHttpUser(id).then(data => this.curUser = data);
+    this.curUser.id = window.localStorage['id'];
+    this.curUser.email = window.localStorage['email'];
+    this.curUser.nickname = window.localStorage['nickname'];
+    this.curUser.deptname = window.localStorage['deptname'];
+    this.curUser.shopname = window.localStorage['shopname'];
+    this.curUser.ismanager = window.localStorage['ismanager'];
+    this.initTime();
   }
 }

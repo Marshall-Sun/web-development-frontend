@@ -5,29 +5,27 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth/auth.guard';
-import { RegisterViewComponent } from './register-view/register-view.component';
-
+import { UserListComponent } from './user-detail/user-list/user-list.component';
+import { ItemListComponent } from './user-detail/item-list/item-list.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/user', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
   {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
+    path: 'user',
+    component: UserDetailComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'userList', component: UserListComponent },
+      { path: 'itemList', component: ItemListComponent },
+    ],
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: { title: 'Users List' }
-  },
-  { path: 'register', component: RegisterComponent },
-  { path: 'register-view', component: RegisterViewComponent },
-  { path: 'user', component: UserDetailComponent, canActivate: [AuthGuard], },
   { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   exports: [RouterModule],
-  imports: [RouterModule.forRoot(routes)]
+  imports: [RouterModule.forRoot(routes)],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}
